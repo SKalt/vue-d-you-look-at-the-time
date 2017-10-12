@@ -1,6 +1,13 @@
 # vue-d-you-look-at-the-time
 
-> Possibly the best vue time picker component. We can't say if it is.  Only... time... will tell.
+> Possibly the best vue time picker component. We can't say if it is.  Only...
+> time... will tell.
+
+Key features, aka TODOs:
+- lightweight.
+- Customizable:
+  - no css! hahaha!
+  - restrict time input
 
 ## Build Setup
 
