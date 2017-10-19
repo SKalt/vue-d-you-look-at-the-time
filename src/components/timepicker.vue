@@ -93,7 +93,6 @@
       }
     },
     data(){
-      debugger;
       // pass in start, end as Dates or things that parse to Dates.
       // see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date
       this.start = new Date(this.start);
@@ -150,7 +149,6 @@
     },
     methods:{
       update(target, value){
-        debugger;
         this.value[target] = value || this[target];
         this.$emit('update', this.value);
         this.onChange(this.value);
@@ -174,6 +172,8 @@
   }
   span.selected-tag{
     position: absolute;
+    padding-top: 0px!important;
+    margin-top: 3px;
   }
   span.v-separator {
     display: inline-block;
