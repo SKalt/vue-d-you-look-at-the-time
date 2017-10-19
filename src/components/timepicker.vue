@@ -131,10 +131,10 @@
         }),
         amPmOptions: [ 'AM', 'PM'],
         value:{
-          hours: this.start.getHours(),
-          amPm: this.start.getHours() < 12 ? 'AM' : 'PM',
-          minutes: this.start.getMinutes(),
-          seconds:this.start.getSeconds()
+          hours: {value:this.start.getHours()},
+          amPm: {value:this.start.getHours() < 12 ? 'AM' : 'PM'},
+          minutes: {value:this.start.getMinutes()},
+          seconds: {value:this.start.getSeconds()}
         }
       };
       console.log(rval);
@@ -150,7 +150,7 @@
     methods:{
       update(target, value){
         this.value[target] = value || this[target];
-        this.$emit('update', this.value);
+        this.$emit('update', this.value); // unpack from value.unit.value -> {unit:value}? 
         this.onChange(this.value);
       }
     },
