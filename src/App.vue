@@ -1,29 +1,14 @@
 <template>
   <div id="app">
-    <!-- year, month, day MVP; later: parts -> part -->
-    <datepicker v-if="dates" v-bind="dates"></datepicker>
-    <!-- <cell v-bind="year"></cell>
-    <cell v-bind="month"></cell>
-    <cell v-bind="day"></cell> -->
-    <timepicker v-if="times" v-bind="times"></timepicker>
-    <!-- <cell v-bind="hour"></cell>
-    <cell v-bind="minute"></cell>
-    <cell v-bind="second">  </cell> -->
-    <!-- <cell
-      v-for="unit in units"
-      :key="unit"
-      :unit="unit"
-      :start="start"
-      :end="end"
-      :format="unit =='month' && monthFormat || unit =='day' && dayFormat"
-      >
-    </cell> -->
+    <v-select :options="options"></v-select>
+    <v-select :options="options"></v-select>
   </div>
 </template>
 
 <script>
-import cell from './components/cell'
+// import cell from './components/cell'
 import {Calendar} from 'calendar';
+import vSelect from 'vue-select';
 export default {
   name: 'vue-d-you-look-at-the-time',
   props:['units','start', 'end', 'dayFormat', 'monthFormat', 'calendar'],
@@ -31,29 +16,30 @@ export default {
     console.log(this.units);
   },
   data(){
+    return {options:[...Array(60).keys()].map(e=>`${e}`)};
     // this.units;
-    debugger;
-    let [startDate, endDate] = [this.start, this.end].map(d=>new Date(d));
-    return{
-      year:{
-        min: startDate.getFullYear(),
-        max: startDate.getFullYear()
-      },
-      month: {
-        // depends on year?
-        min: startDate.get
-      },
-      day: {
-        // depends on month & year
-      },
-      hour:{
-
-      };
-    let minute = {};
-    let second = {};
-    // let millisecond = {}
-    return {
-      units:['day'], start:'2016-01-01', end:'2017-01-01'};
+    // debugger;
+    // let [startDate, endDate] = [this.start, this.end].map(d=>new Date(d));
+    // return{
+    //   year:{
+    //     min: startDate.getFullYear(),
+    //     max: startDate.getFullYear()
+    //   },
+    //   month: {
+    //     // depends on year?
+    //     min: startDate.get
+    //   },
+    //   day: {
+    //     // depends on month & year
+    //   },
+    //   hour:{
+    //
+    //   };
+    // let minute = {};
+    // let second = {};
+    // // let millisecond = {}
+    // return {
+    //   units:['day'], start:'2016-01-01', end:'2017-01-01'};
   },
   computed:{
     day(){
@@ -61,7 +47,7 @@ export default {
     }
   },
   components: {
-    cell
+    'v-select':vSelect
   }
 }
 </script>
