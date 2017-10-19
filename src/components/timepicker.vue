@@ -1,9 +1,9 @@
 <template>
-  <span>
+  <span class="vue-d-you-look-at-the-time">
   <v-select
   class="hours"
   v-if="hours"
-  :placeholder="hours"
+  :placeholder="String(value.hours || hours) "
   :options="hourOptions"
   :value.sync="value.hours"
   :onChange="update"
@@ -11,25 +11,26 @@
   <v-select
   class="am-pm"
   v-if="amPm"
+  :placeholder="value.amPm || amPm"
   :options="amPmOptions"
   :value.sync="value.amPm"
   :onChange="update"></v-select>
-  <span v-if="minutes || seconds">{{seperator}}</span>
+  <span class="v-separator" v-if="minutes || seconds">{{seperator}}</span>
   <v-select
   class="minutes"
   v-if="minutes"
-  :placeholder="minutes"
+  :placeholder="String(value.minutes.label || minutes)"
   :options="minuteOptions"
   :value.sync="value.minutes"
   :onChange="update"
   ></v-select>
-  <span v-if="seconds">
+  <span class="v-separator" v-if="seconds">
     {{seperator}}
   </span>
   <v-select
   class="seconds"
   v-if="seconds"
-  :placeholder="seconds"
+  :placeholder="String(value.seconds.label || seconds) "
   :options="secondsOptions"
   :value.sync="value.seconds"
   :onChange="update"
@@ -54,7 +55,9 @@
           return !isNaN(new Date(value).getTime());
         }
       },
-      'pad':null, // whether to pad numbers with zeros
+      'pad':{
+        default:true
+      }, // whether to pad numbers with zeros
       'formatterFn':{
         type:Function,
         default: x=>x,
@@ -112,7 +115,7 @@
         }),
         minuteOptions:range(
           this.start.getMinutes(),
-          this.end.getMinutes()
+          interval > 1000*60**2 ? 59 :this.end.getMinutes()
         ).map(number =>{
           return {
             value:number,
@@ -121,7 +124,7 @@
         }),
         secondsOptions:range(
           this.start.getSeconds(),
-          this.end.getSeconds()
+          interval > 1000*60 ? 59 :this.end.getSeconds()
         ).map(number =>{
           return {
             value:number,
@@ -130,14 +133,11 @@
         }),
         value: {
           hours: this.start.getHours(),
-          amPm: (this.start.getHours() > 12 && 12) || 0,
-          minutes:this.start.getMinutes(),
+          amPm: (this.start.getHours() < 12) ? 'AM' : 'PM',
+          minutes: this.start.getMinutes(),
           seconds:this.start.getSeconds()
         },
-        amPmOptions: [
-          {value: 0, label: this.amPm == 'lowercase' ? 'am' : 'AM'},
-          {value: 12, label: this.amPm == 'lowercase' ? 'pm' : 'PM'}
-        ]
+        amPmOptions: [ 'AM', 'PM']
       };
       console.log(rval);
       return rval;
@@ -151,3 +151,25 @@
     components: {vSelect}
   }
 </script>
+<style >
+  .v-select {
+    display:inline-block;
+    width:3em;
+    vertical-align: middle;
+  }
+  .vue-d-you-look-at-the-time{
+    display: inline-block;
+    line-height: 3em;
+  }
+  i.open-indicator {
+    display:none!important;
+  }
+  span.selected-tag{
+    position: absolute;
+  }
+  span.v-separator {
+    display: inline-block;
+    position:relative;
+    vertical-align: middle;
+  }
+</style>
