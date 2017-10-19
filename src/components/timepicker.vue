@@ -1,39 +1,37 @@
 <template>
   <span class="vue-d-you-look-at-the-time">
   <v-select
-  class="hours"
+  data-id="hours"
   v-if="hours"
-  :placeholder="String(value.hours || hours) "
+  :placeholder="String(hours) "
   :options="hourOptions"
-  :value.sync="value.hours"
-  :onChange="update"
+  :onChange="val => update('hours', val)"
   ></v-select>
   <v-select
   class="am-pm"
   v-if="amPm"
-  :placeholder="value.amPm || amPm"
+  data-id="am-pm"
+  :placeholder="String(value.amPm || 'AM')"
   :options="amPmOptions"
-  :value.sync="value.amPm"
-  :onChange="update"></v-select>
+  :onChange="val => update('amPm', val)"></v-select>
   <span class="v-separator" v-if="minutes || seconds">{{seperator}}</span>
   <v-select
-  class="minutes"
+  data-id="minutes"
   v-if="minutes"
-  :placeholder="String(value.minutes.label || minutes)"
+  :placeholder="String(minutes)"
   :options="minuteOptions"
-  :value.sync="value.minutes"
-  :onChange="update"
+  :onChange="val => update('minutes', val)"
   ></v-select>
   <span class="v-separator" v-if="seconds">
     {{seperator}}
   </span>
   <v-select
   class="seconds"
+  data-id="seconds"
   v-if="seconds"
-  :placeholder="String(value.seconds.label || seconds) "
+  :placeholder="String(seconds) "
   :options="secondsOptions"
-  :value.sync="value.seconds"
-  :onChange="update"
+  :onChange="val => update('seconds', val)"
   ></v-select>
   </span>
 </template>
@@ -89,12 +87,13 @@
         type: String,
         default: ':'
       },
-      onChange:{
+      'onChange':{
         type:Function,
         default:()=>'' // pass
       }
     },
     data(){
+      debugger;
       // pass in start, end as Dates or things that parse to Dates.
       // see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date
       this.start = new Date(this.start);
@@ -131,19 +130,28 @@
             label: this.formatterFn(`${number}`.padStart(this.pad ? 2:0, '0'))
           };
         }),
-        value: {
+        amPmOptions: [ 'AM', 'PM'],
+        value:{
           hours: this.start.getHours(),
-          amPm: (this.start.getHours() < 12) ? 'AM' : 'PM',
+          amPm: this.start.getHours() < 12 ? 'AM' : 'PM',
           minutes: this.start.getMinutes(),
           seconds:this.start.getSeconds()
-        },
-        amPmOptions: [ 'AM', 'PM']
+        }
       };
       console.log(rval);
       return rval;
     },
+    calculated:{
+      _start(){return this.start},
+      _end(){return this.end},
+      value(){
+        return 0;
+      }
+    },
     methods:{
-      update(e){
+      update(target, value){
+        debugger;
+        this.value[target] = value || this[target];
         this.$emit('update', this.value);
         this.onChange(this.value);
       }
