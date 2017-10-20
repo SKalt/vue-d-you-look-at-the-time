@@ -11,7 +11,7 @@
   class="am-pm"
   v-if="amPm"
   data-id="am-pm"
-  :placeholder="String(value.amPm || 'AM')"
+  :placeholder="String(value.amPm.value || 'AM')"
   :options="amPmOptions"
   :onChange="val => update('amPm', val)"></v-select>
   <span class="v-separator" v-if="minutes || seconds">{{seperator}}</span>
@@ -150,7 +150,7 @@
     methods:{
       update(target, value){
         this.value[target] = value || this[target];
-        this.$emit('update', this.value); // unpack from value.unit.value -> {unit:value}? 
+        this.$emit('update', this.value); // unpack from value.unit.value -> {unit:value}?
         this.onChange(this.value);
       }
     },
