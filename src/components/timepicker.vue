@@ -7,14 +7,7 @@
   :options="hourOptions"
   :onChange="val => update('hours', val)"
   ></v-select>
-  <v-select
-  class="am-pm"
-  v-if="amPm"
-  data-id="am-pm"
-  :placeholder="String(value.amPm.value || 'AM')"
-  :options="amPmOptions"
-  :onChange="val => update('amPm', val)"></v-select>
-  <span class="v-separator" v-if="minutes || seconds">{{seperator}}</span>
+  <span class="v-separator" v-if="minutes && hours">{{seperator}}</span>
   <v-select
   data-id="minutes"
   v-if="minutes"
@@ -33,6 +26,13 @@
   :options="secondsOptions"
   :onChange="val => update('seconds', val)"
   ></v-select>
+  <v-select
+  class="am-pm"
+  v-if="amPm"
+  data-id="am-pm"
+  :placeholder="String(value.amPm.value || 'AM')"
+  :options="amPmOptions"
+  :onChange="val => update('amPm', val)"></v-select>
   </span>
 </template>
 <script>
