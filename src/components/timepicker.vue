@@ -30,16 +30,22 @@
   class="am-pm"
   v-if="amPm"
   data-id="am-pm"
-  :placeholder="String(value.amPm.value || 'AM')"
+  :placeholder="String(value.amPm || 'AM')"
   :options="amPmOptions"
   :onChange="val => update('amPm', val)"></v-select>
   </span>
 </template>
 <script>
-  import {range} from '../ranges.js';
+  function range(min, max, minPossible=0, maxPossible=3000){
+    max = Math.min(maxPossible, max); //
+    min = Math.max(minPossible, min);
+    console.log(min, max)
+    return [...Array(max+1 - min ).keys()].map(i=> i + min);
+  }
   import vSelect from 'vue-select';
   export default {
     props:{
+      //TODO: document
       'start':{
         type:[String,Date],
         default: ()=>new Date(0,0,0,0,0),
@@ -131,10 +137,10 @@
         }),
         amPmOptions: [ 'AM', 'PM'],
         value:{
-          hours: {value:this.start.getHours()},
-          amPm: {value:this.start.getHours() < 12 ? 'AM' : 'PM'},
-          minutes: {value:this.start.getMinutes()},
-          seconds: {value:this.start.getSeconds()}
+          hours: this.start.getHours(),
+          amPm: this.start.getHours() < 12 ? 'AM' : 'PM',
+          minutes: this.start.getMinutes(),
+          seconds: this.start.getSeconds()
         }
       };
       console.log(rval);
@@ -149,7 +155,7 @@
     },
     methods:{
       update(target, value){
-        this.value[target] = value || this[target];
+        this.value[target] = (value || {}).value || value || this[target];
         this.$emit('update', this.value); // unpack from value.unit.value -> {unit:value}?
         this.onChange(this.value);
       }
@@ -180,4 +186,7 @@
     position:relative;
     vertical-align: middle;
   }
+  /*ul.dropdown-menu li{
+    width:3em!important;
+  }*/
 </style>
