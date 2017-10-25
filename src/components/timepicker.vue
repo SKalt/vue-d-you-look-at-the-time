@@ -166,8 +166,11 @@
 <style >
   .v-select {
     display:inline-block;
-    width:3em;
+    width:4em;
     vertical-align: middle;
+  }
+  .v-select .dropdown-toggle input {
+    text-align: center;
   }
   .vue-d-you-look-at-the-time{
     display: inline-block;
@@ -186,7 +189,7 @@
     position:relative;
     vertical-align: middle;
   }
-  /*ul.dropdown-menu li{
-    width:3em!important;
-  }*/
+  ul.dropdown-menu{
+    min-width:3em!important;
+  }
 </style>
