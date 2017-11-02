@@ -1,0 +1,3 @@
+[submodule "src/components/vue-select"]
+	path = src/components/vue-select
+	url = https://github.com/SKalt/vue-select.git

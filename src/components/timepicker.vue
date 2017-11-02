@@ -6,6 +6,7 @@
   :placeholder="String(hours) "
   :options="hourOptions"
   :onChange="val => update('hours', val)"
+  :filter-function="filterFromStart"
   ></v-select>
   <span class="v-separator" v-if="minutes && hours">{{seperator}}</span>
   <v-select
@@ -42,7 +43,9 @@
     console.log(min, max)
     return [...Array(max+1 - min ).keys()].map(i=> i + min);
   }
-  import vSelect from 'vue-select';
+  import vSelect from './vue-select/src/components/Select.vue';
+  //TODO: when vue-select finally merges fixes & re-publishes to npm,
+  //TODO: revert to import vSelect from 'vue-select'
   export default {
     props:{
       //TODO: document
@@ -154,6 +157,9 @@
       }
     },
     methods:{
+      filterFromStart(option, label, search){
+        return label.match(new RegExp(`^${search}`, 'i'))
+      },
       update(target, value){
         this.value[target] = (value || {}).value || value || this[target];
         this.$emit('update', this.value); // unpack from value.unit.value -> {unit:value}?
@@ -190,6 +196,6 @@
     vertical-align: middle;
   }
   ul.dropdown-menu{
-    min-width:3em!important;
+    min-width:5em!important;
   }
 </style>
