@@ -1,6 +1,6 @@
 {
   "name": "vue-d-you-look-at-the-time",
-  "main":"./src/components/timepicker.vue",
+  "main": "./src/components/timepicker.vue",
   "version": "1.0.0",
   "description": "Possibly the best vue time picker component. We can't say if it is.  Only... time... will tell.",
   "author": "Steven Kalt <kalt.steven@gmail.com>",
