@@ -2,7 +2,7 @@
   "name": "vue-d-you-look-at-the-time",
   "main": "./src/components/timepicker.vue",
   "version": "1.0.0",
-  "description": "Possibly the best vue time picker component. We can't say if it is.  Only... time... will tell.",
+  "description": "Simple wrappers around input[type=time|date]",
   "author": "Steven Kalt <kalt.steven@gmail.com>",
   "private": true,
   "scripts": {
@@ -15,9 +15,7 @@
     "lint": "eslint --ext .js,.vue src test/unit/specs test/e2e/specs"
   },
   "dependencies": {
-    "calendar": "^0.1.0",
-    "vue": "^2.4.2",
-    "vue-select": "github:sagalbot/vue-select"
+    "vue": "^2.4.2"
   },
   "devDependencies": {
     "autoprefixer": "^7.1.2",
