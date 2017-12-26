@@ -8,6 +8,6 @@ Vue.config.productionTip = false
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
-  template: '<time-picker/><date-picker/><date-time-picker/>',
+  template: '<span><time-picker/><date-picker/><date-time-picker/></span>',
   components
 });

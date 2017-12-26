@@ -3,11 +3,17 @@
 </template>
 <script>
   import TimeOrDate from './TimeOrDate.vue';
-  let {props, methods, data} = TimeOrDate;
+  let {props, data} = TimeOrDate;
   props = {...props};
   delete props.type;
   export default {
-      props, methods, data
-      components: {TimeOrDate}
+      props, data,
+      components: {TimeOrDate},
+      methods: {
+        setValue(value){
+          this.value = value;
+          this.$emit('input', value);
+        }
+      }
   }
 </script>

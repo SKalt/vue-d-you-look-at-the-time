@@ -11,7 +11,7 @@
     />
 </template>
 <script>
-import {isDate, stringOrNumber} from './utils.js';
+import {isDate, stringOrNumber} from '../utils.js';
 
 export default {
   props: {
@@ -19,6 +19,8 @@ export default {
     name: stringOrNumber,
     min: isDate,
     max: isDate,
+    defaultValue: isDate,
+    required:{ type: Boolean },
     type: {
       type: String,
       required: true,
@@ -28,12 +30,12 @@ export default {
     }
   },
   data(){
-    return {value: null};
+    return {value: ''};
   },
-  methods(){
+  methods:{
     setValue(e){
       this.value = e.target.value;
-      this.$emit('input', value);
+      this.$emit('input', this.value);
     }
   }
 }

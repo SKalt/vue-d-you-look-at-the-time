@@ -3,8 +3,8 @@
     <time-picker
       :id="timeId"
       :name="timeName"
-      :min="timeMin"
-      :max="timeMax"
+      :min="minTime"
+      :max="maxTime"
       :required="timeRequired"
       :default-value="defaultTime"
       @input="setTime"
@@ -12,8 +12,8 @@
     <date-picker
       :id="dateId"
       :name="dateName"
-      :min="dateMin"
-      :max="dateMax"
+      :min="minDate"
+      :max="maxDate"
       :required="dateRequired"
       :default-value="defaultDate"
       @input="setDate"
@@ -31,6 +31,10 @@ export default {
     minDate: isDate,
     maxTime: isDate,
     maxDate: isDate,
+    defaultTime: isDate,
+    defaultDate: isDate,
+    dateRequired: {type: Boolean},
+    timeRequired: {type: Boolean},
     timeId: stringOrNumber,
     timeName: stringOrNumber,
     dateId: stringOrNumber,
