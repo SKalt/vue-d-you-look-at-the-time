@@ -1,19 +1,29 @@
 <template>
-  <time-or-date type="date" @input="setValue"></time-or-date>
+  <time-or-date
+    type="date"
+    :value="value"
+    @input="emit"
+    :process="toDateString"
+    />
 </template>
 <script>
+  import {worksAsDate, toDateString, data, emit} from '../utils.js';
   import TimeOrDate from './TimeOrDate.vue';
-  let {props, methods, data} = TimeOrDate;
-  props = {...props};
+  let {props} = TimeOrDate;
+  props = {
+    ...props,
+    min: worksAsDate,
+    max: worksAsDate,
+    value: worksAsDate
+  };
   delete props.type;
+  delete props.process;
   export default {
       props, data,
       components: {TimeOrDate},
       methods: {
-        setValue(value){
-          this.value = value;
-          this.$emit('input', value);
-        }
-      }
+        toDateString,
+        emit
+    }
   }
 </script>

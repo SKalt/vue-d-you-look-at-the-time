@@ -1,13 +1,13 @@
 <template>
   <input
     :type="type"
-    :min="min"
-    :max="max"
-    :value="defaultValue"
+    :min="processed.min"
+    :max="processed.max"
+    v-model="processed.value"
     :required="required"
     :name="name"
     :id="id"
-    @input="setValue"
+    @input="bubbleValue"
     />
 </template>
 <script>
@@ -15,11 +15,13 @@ import {isDate, stringOrNumber} from '../utils.js';
 
 export default {
   props: {
+    process: Function,
     id: stringOrNumber,
     name: stringOrNumber,
-    min: isDate,
-    max: isDate,
-    defaultValue: isDate,
+    min: {},
+    max: {},
+    // defaultValue: {},
+    value: {},
     required:{ type: Boolean },
     type: {
       type: String,
@@ -30,12 +32,18 @@ export default {
     }
   },
   data(){
-    return {value: ''};
+    return {
+      processed: {
+        min: this.process(this.min),
+        max: this.process(this.max),
+        value: this.process(this.value)
+      }
+    };
   },
   methods:{
-    setValue(e){
-      this.value = e.target.value;
-      this.$emit('input', this.value);
+    bubbleValue() {
+      // this.value = e.target.value;
+      this.$emit('input', this.processed.value);
     }
   }
 }
