@@ -1,30 +1,34 @@
 <template>
-  <time-or-date
+  <input
     type="time"
-    :value="computedValue"
-    @input="emit"
-    :process="toTimeString"
-  />
+    :min="processed.min"
+    :max="processed.max"
+    :value="processed.value"
+    :required="required"
+    :name="name"
+    :id="id"
+    @input="bubbleValue"
+    />
 </template>
 <script>
-  import {worksAsTime, toTimeString, data, emit} from '../utils.js';
-  import TimeOrDate from './TimeOrDate.vue';
-  let {props} = TimeOrDate;
-  props = {
-    ...props,
-    min: worksAsTime,
-    max: worksAsTime,
-    value: worksAsTime
-  };
-  delete props.type;
-  delete props.process;
+  import {worksAsTime, toTimeString, data, methods, props} from '../utils.js';
+
   export default {
-    props,
-    components: {TimeOrDate},
-    data,
-    methods: {
-      toTimeString,
-      emit
-    }
+    props: {
+      ...props,
+      min: worksAsTime,
+      max: worksAsTime,
+      value: worksAsTime
+    },
+    data(){
+      return {
+        processed: {
+          value: toTimeString(this.value),
+          min: toTimeString(this.min),
+          max: toTimeString(this.max)
+        }
+      }
+    },
+    methods
   }
 </script>

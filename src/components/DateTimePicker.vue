@@ -16,6 +16,7 @@
       :name="dateName"
       :min="minDate"
       :max="maxDate"
+      :value="value"
       :required="dateRequired"
       @input="setDate"
     ></date-picker>
@@ -47,7 +48,7 @@ export default {
   },
   data() {
     return this.value
-      ? {time: this.value || '', date: this.value || ''}
+      ? {time: toTimeString(this.value), date: toDateString(this.value)}
       : {time: null, date: null};
   },
   computed: {
