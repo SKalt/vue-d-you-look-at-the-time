@@ -11,6 +11,6 @@ describe('TimePicker', ()=>{
     const comp = mount(propsData);
     assert.equal(comp.value, propsData.value);
     assert.ok(comp.processed.value);
-    assert.equal(comp.processed.value, '01:59');
+    assert.match(comp.processed.value, /^(0|1)\d:[1-5]\d$/);
   });
 });

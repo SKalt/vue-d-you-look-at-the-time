@@ -14,7 +14,6 @@ function testDateString(str) {
 }
 
 function toLocaleTimeString(d){
-  console.log(d);
   return d.toLocaleTimeString('en-US', {hour12: false}).slice(0, 5);
 }
 function coerce(obj, strTest, toString) {
