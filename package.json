@@ -1,7 +1,7 @@
 {
   "name": "vue-d-you-look-at-the-time",
   "main": "./src/index.js",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "description": "Simple wrappers around input[type=time|date]",
   "author": "Steven Kalt <kalt.steven@gmail.com>",
   "repository": {
