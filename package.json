@@ -1,20 +1,23 @@
 {
   "name": "vue-d-you-look-at-the-time",
-  "main": "./src/components/timepicker.vue",
+  "main": "./src/index.js",
   "version": "2.0.0",
   "description": "Simple wrappers around input[type=time|date]",
   "author": "Steven Kalt <kalt.steven@gmail.com>",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/SKalt/vue-d-you-look-at-the-time.git"
+  },
   "scripts": {
     "dev": "node build/dev-server.js",
     "start": "npm run dev",
     "build": "node build/build.js",
     "unit": "cross-env BABEL_ENV=test karma start test/unit/karma.conf.js --single-run",
-    "e2e": "node test/e2e/runner.js",
+    "e2e": "echo 0",
     "test": "npm run unit && npm run e2e",
     "lint": "eslint --ext .js,.vue src test/unit/specs test/e2e/specs"
   },
   "dependencies": {
-    "karma-chrome-launcher": "^2.2.0",
     "vue": "^2.4.2"
   },
   "devDependencies": {
@@ -50,6 +53,7 @@
     "inject-loader": "^3.0.0",
     "karma": "^1.4.1",
     "karma-coverage": "^1.1.1",
+    "karma-firefox-launcher": "^1.1.0",
     "karma-mocha": "^1.3.0",
     "karma-phantomjs-launcher": "^1.0.2",
     "karma-phantomjs-shim": "^1.4.0",
