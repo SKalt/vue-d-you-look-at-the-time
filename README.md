@@ -1,4 +1,5 @@
 # vue-d-you-look-at-the-time
+![Travis build status](https://travis-ci.org/SKalt/vue-d-you-look-at-the-time.svg?branch=master)
 
 A Vue.js time picker that's searchable, tabbable, and compatible with Vuex.
 
