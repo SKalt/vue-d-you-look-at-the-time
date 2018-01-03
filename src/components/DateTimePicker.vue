@@ -62,6 +62,12 @@ export default {
     //   return this.value
     // }
   },
+  watch: {
+    value: function(value){
+      this.time = toTimeString(value);
+      this.date = toDateString(value);
+    }
+  },
   methods: {
     setTime(value){
       this.time = value;
