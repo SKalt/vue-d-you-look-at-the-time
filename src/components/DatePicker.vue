@@ -29,6 +29,17 @@ export default {
       }
     }
   },
+  watch : {
+    value(value) {
+      this.processed.value = toDateString(value);
+    },
+    min(min) {
+      this.processed.min = toDateString(min)
+    },
+    max(max) {
+      this.processed.max = toDateString(max)
+    }
+  },
   methods
 }
 </script>

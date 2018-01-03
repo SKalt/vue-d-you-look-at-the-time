@@ -29,6 +29,17 @@
         }
       }
     },
+    watch : {
+      value(value) {
+        this.processed.value = toTimeString(value);
+      },
+      min(min) {
+        this.processed.min = toTimeString(min)
+      },
+      max(max) {
+        this.processed.max = toTimeString(max)
+      }
+    },
     methods
   }
 </script>
